@@ -11,14 +11,14 @@ class BookingList extends StatefulWidget {
 class _BookingListState extends State<BookingList> {
   @override
   Widget build(BuildContext context) {
-
-    final booking = Provider.of<QuerySnapshot>(context);
-    //check terminal for firebase record feedback
-    for(var doc in booking.documents){
-      print(doc.data);
-    }
-    return Container(
+    
+    // final booking = Provider.of<QuerySnapshot>(context);
+    // //check terminal for firebase record feedback
+    // for(var doc in booking.documents){
+    //   print(doc.data);
+    // }
+     return Container(
       
-    );
+     );
   }
 }

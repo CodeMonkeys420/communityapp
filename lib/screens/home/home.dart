@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
                 icon: Icon(Icons.person),
                 onPressed: ()async {
                    await _auth.signOut();
-                },
+                },//hier kom die nav bar
               )
             ],
           ),
