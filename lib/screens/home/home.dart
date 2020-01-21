@@ -1,3 +1,4 @@
+import 'package:communityapp/models/booking.dart';
 import 'package:communityapp/screens/home/booking_list.dart';
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapShot>.value(
-          value: DatabaseService().User,//he used brew in stead of user
-          child: Scaffold(
+    // StreamProvider<QuerySnapShot>.value(       //he used brew in stead of user
+    //       value: DatabaseService().Booking,    
+    
+
+    return Scaffold(
           backgroundColor: Colors.blue[50],
           appBar: AppBar(
             title: Text('Home Page'),
@@ -30,7 +33,6 @@ class Home extends StatelessWidget {
             ],
           ),
           body: BookingList(),
-      ),
-    );
+      );
   }
 }

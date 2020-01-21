@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/models/user.dart';
 import 'package:communityapp/models/booking.dart';
+import 'package:communityapp/screens/home/booking_list.dart';
 
 class DatabaseService {
   //collection reference
@@ -20,15 +21,16 @@ DatabaseService({ this.uid });
   //just add field names/timestamps needed in stead of dummy data
 
   //
-  List<Booking> _bookingListFromSnapShot(QuerySnapShot){
-    return snapshot.documents.map((doc){
-      return Booking(AmmountPeople: doc.data['AmmountPeople'] ?? '',
-      //return die ander field names nes hier bo
-      );
-    });
-  }
+  // List<Booking> _bookingListFromSnapShot(QuerySnapShot){
+  //   return Snapshot.documents.map((doc){
+  //     return Booking(AmmountPeople: doc.data['AmmountPeople'] ?? '',
+  //     //return die ander field names nes hier bo
+  //     );
+  //   }).toList();
+  // }
 
-  Stream<QuerySnapshot> get User {//he used brew in stead of user?
-    return userBookings.snapshots();
-  }
+  // Stream<QuerySnapshot> get User {//he used brew in stead of user?
+  //   return userBookings.snapshots()
+  //   .map(_bookingListFromSnapShot);
+  // }
 }
