@@ -1,5 +1,6 @@
 import 'package:communityapp/services/auth.dart';
 import 'package:communityapp/shared/constance.dart';
+import 'package:communityapp/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,6 +16,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
+  bool loading = false;
 
   //textfield state
   String email = '';
@@ -23,7 +25,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.blue[200],
       appBar: AppBar(backgroundColor: Colors.blue[400],
       elevation: 1.0,
@@ -72,9 +74,13 @@ class _SignInState extends State<SignIn> {
               ),
               onPressed: () async{
                 if(_formkey.currentState.validate()){
+                  setState(() => loading = true) ;
                   dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                    if(result == null){
-                     setState(() => error = 'Could not sign in with those credentials');
+                     setState(() {
+                       setState(() => loading = false) ;
+                       error = 'Could not sign in with those credentials';
+                     } );
                    }
                  }
               },
