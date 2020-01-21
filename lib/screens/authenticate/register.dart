@@ -1,17 +1,17 @@
-import 'package:communityapp/services/auth.dart';
 import 'package:communityapp/shared/constance.dart';
 import 'package:flutter/material.dart';
+import 'package:communityapp/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
 
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
@@ -27,11 +27,11 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.blue[200],
       appBar: AppBar(backgroundColor: Colors.blue[400],
       elevation: 1.0,
-      title: Text('Sign in to Community Portal'),
+      title: Text('Sign Up to Community Portal'),
       actions: <Widget>[
         FlatButton.icon(
           icon: Icon(Icons.person),
-          label: Text('Register'),
+          label: Text('Sign in'),
           onPressed: () {
             widget.toggleView();
           },
@@ -50,15 +50,14 @@ class _SignInState extends State<SignIn> {
               decoration: textInputDecoration.copyWith(hintText: 'Email',),
               validator: (val) => val.isEmpty ? 'Enter a email' : null,
               onChanged: (val) {
-                
                 setState(() => email = val);
               }
               ),
             SizedBox(height: 20.0,),
             TextFormField(
+               decoration: textInputDecoration.copyWith(hintText: 'Password',),
+              validator: (val) => val.length <6 ? 'Longer password needed' : null,
              obscureText: true,
-             decoration: textInputDecoration.copyWith(hintText: 'Password',),
-             validator: (val) => val.length <6 ? 'Enter a password' : null,
              onChanged: (val) {
                 setState(() => password = val);
               }
@@ -67,27 +66,30 @@ class _SignInState extends State<SignIn> {
             RaisedButton(
               color: Colors.red[500],
               child: Text(
-                'Sign in',
+                'Register',
                 style: TextStyle(color: Colors.white)
               ),
               onPressed: () async{
                 if(_formkey.currentState.validate()){
-                  dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                   if(result == null){
-                     setState(() => error = 'Could not sign in with those credentials');
-                   }
+                  dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                  if(result == null){
+                    setState(() => error = 'please supply a valid email');
+                  }
                  }
+                // else{
+                //   print('please use correct email or password')
+                // }
               },
             ),
-                        SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(
               error,
-              style: TextStyle(color: Colors.red, fontSize:14),),
+              style: TextStyle(color: Colors.red, fontSize:14),
+            )
           ],
         ),
       ),
     ),
     );
-
   }
 }
