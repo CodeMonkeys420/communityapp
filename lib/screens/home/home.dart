@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:communityapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:communityapp/shared/bottom_navy_bar.dart';
 
 class Home extends StatelessWidget {
 
@@ -28,7 +29,8 @@ class Home extends StatelessWidget {
                 icon: Icon(Icons.person),
                 onPressed: ()async {
                    await _auth.signOut();
-                },//hier kom die nav bar
+                },
+                 //hier kom die nav bar
               )
             ],
           ),
