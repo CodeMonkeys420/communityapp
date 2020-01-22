@@ -8,11 +8,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'package:communityapp/shared/nav.dart';
 
-class Home extends StatelessWidget {
 
-  final AuthService _auth = AuthService();
 
-  
+  int currentIndex = 0;
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    // NewsPG(title: "Home Page"),
+    //add pages here
+    // ReportPg(),
+    // Facilities()
+
+  ];
+     var colorCustom2 = colorCustom;
+
       Map<int, Color> color =
 {
   50:Color.fromRGBO(217,180,111, .1),
@@ -26,10 +34,20 @@ class Home extends StatelessWidget {
   800:Color.fromRGBO(217,180,111, .9),
   900:Color.fromRGBO(217,180,111, 1),
 };
-//waar die color func assign word
+
 MaterialColor colorCustom = MaterialColor(0xFFd9b46f, color);
-//color insert word
+
 const PrimaryColorTwo = const Color(0xFFd9b46f);
+
+class Home extends StatefulWidget {
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final AuthService _auth = AuthService();
+
 
 
   @override
@@ -58,10 +76,9 @@ const PrimaryColorTwo = const Color(0xFFd9b46f);
           body: BookingList(),
 
 //hier kom die nav bar
-           int currentIndex = 0;
-  int _currentIndex = 0;
+  //          int currentIndex = 0;
+  // int _currentIndex = 0;
 
-     var colorCustom2 = colorCustom;
           bottomNavigationBar: BottomNavyBar(
              selectedIndex: _currentIndex,
              showElevation: true,
@@ -69,32 +86,34 @@ const PrimaryColorTwo = const Color(0xFFd9b46f);
              onItemSelected: (index) {
                setState(() => 
                _currentIndex = index);
-             } );
+             },
              items: [
                BottomNavyBarItem(
                  icon: Icon(Icons.home),
                  title: Text('Home'),
-                 activeColor: colorCustom,
+                 activeColor: Colors.blue,
                ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.mail),
-                 title: Text('Messages'),
-                 activeColor: colorCustom,
-               ),
+              //  BottomNavyBarItem(
+              //    icon: Icon(Icons.mail),
+              //    title: Text('Messages'),
+              //    activeColor: colorCustom,
+              //  ),
                BottomNavyBarItem(
                  icon: Icon(Icons.person),
-                 title: Text('Profile'),
-                 activeColor: colorCustom,
+                 title: Text('Bookings'),
+                 activeColor: Colors.black,
                ),
                BottomNavyBarItem(
                  icon: Icon(Icons.report_problem),
                  title: Text('Report'),
-                 activeColor: colorCustom,
+                 activeColor: Colors.red,
                ),
                BottomNavyBarItem(
                  icon: Icon(Icons.local_activity),
                  title: Text('Facilities'),
-                 activeColor: colorCustom2,
+                 activeColor: Colors.green,
+               ),
+             ]
           ),
       );
   }
