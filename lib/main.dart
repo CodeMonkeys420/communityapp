@@ -29,14 +29,9 @@ MaterialColor colorCustom = MaterialColor(0xFFd9b46f, color);
 const PrimaryColorTwo = const Color(0xFFd9b46f);
 
 class MyApp extends StatefulWidget {
-
-
-  
-  // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
@@ -46,47 +41,5 @@ class _MyAppState extends State<MyApp> {
         home: Wrapper(),
       ),
     );
-
-  int currentIndex = 0;
-  int _currentIndex = 0;
-
-     var colorCustom2 = colorCustom;
-          bottomNavigationBar: BottomNavyBar(
-             selectedIndex: _currentIndex,
-             showElevation: true,
-             itemCornerRadius: 8,
-             onItemSelected: (index) {
-               setState(() => 
-               _currentIndex = index);
-             } );
-             items: [
-               BottomNavyBarItem(
-                 icon: Icon(Icons.home),
-                 title: Text('Home'),
-                 activeColor: colorCustom,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.mail),
-                 title: Text('Messages'),
-                 activeColor: colorCustom,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.person),
-                 title: Text('Profile'),
-                 activeColor: colorCustom,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.report_problem),
-                 title: Text('Report'),
-                 activeColor: colorCustom,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.local_activity),
-                 title: Text('Facilities'),
-                 activeColor: colorCustom2,
-          ),
-        ];
-      
-    
     }
 }

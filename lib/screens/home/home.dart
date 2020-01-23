@@ -3,25 +3,192 @@ import 'package:communityapp/screens/home/booking_list.dart';
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:communityapp/services/database.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'package:communityapp/shared/nav.dart';
+import 'post_page.dart';
+
+
+final AuthService _auth = AuthService();
+const PrimaryColor = const Color(0xFF151026);
+bool FlagLoc = false;
+
+class Main extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Demo App',
+      theme: ThemeData(
+        primarySwatch: colorCustom,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+var lat ;
+var Lng ;
 
 
 
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+
+
+  @override
+  
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>  {
   int currentIndex = 0;
+ 
   int _currentIndex = 0;
+
+ Position _currentPosition;
   final List<Widget> _children = [
-    // NewsPG(title: "Home Page"),
-    //add pages here
+    NewsPG(title: "Home Page"),
+    // MesgPg(),
+    // MyHomePageProfile(),
     // ReportPg(),
     // Facilities()
 
   ];
-     var colorCustom2 = colorCustom;
 
-      Map<int, Color> color =
+
+
+  @override
+  Widget build(BuildContext context)  {
+   //getDataF();
+    _getCurrentLocation();
+
+
+    if(_currentPosition != null)
+    {
+
+      lat="LAT: ${_currentPosition.latitude}" ;
+      Lng= "LNG: ${_currentPosition.longitude}";
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+        Padding(
+        padding: const EdgeInsets.all(20.0)),
+            Image.asset(
+              'Assets/vLogo.png',
+              fit: BoxFit.contain,
+              height: 20,
+              scale: 1,
+            ),
+  
+          ],
+            
+        ),
+          actions: <Widget>[
+      // action button
+
+            FlatButton.icon(
+                label: Text('Log Out'),
+                icon: Icon(Icons.person),
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ), 
+
+      IconButton(
+      icon: Icon(Icons.error_outline),
+      onPressed: () {
+
+        _Alert(context);
+
+
+           _getCurrentLocation();
+
+
+          if (_currentPosition != null)
+            {
+
+              lat="LAT: ${_currentPosition.latitude}" ;
+              Lng= "LNG: ${_currentPosition.longitude}";
+            }
+
+
+
+
+
+
+
+
+      },
+    ),]
+      ),
+      body:  _children[_currentIndex],
+
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex: _currentIndex,
+        showElevation: true,
+        itemCornerRadius: 8,
+        onItemSelected: (index) => setState(() {
+          _currentIndex = index;
+        }),
+        items: [
+          BottomNavyBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+            activeColor: Colors.blue,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Bookings'),
+            activeColor: Colors.black,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.report_problem),
+            title: Text('Report'),
+            activeColor: Colors.red,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.local_activity),
+            title: Text('Facilities'),
+            activeColor: Colors.green,
+          ),
+        ],
+      ),
+    );
+  }
+
+  _getCurrentLocation() {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+}
+
+
+
+
+
+
+
+
+Map<int, Color> color =
 {
   50:Color.fromRGBO(217,180,111, .1),
   100:Color.fromRGBO(217,180,111, .2),
@@ -34,87 +201,47 @@ import 'package:communityapp/shared/nav.dart';
   800:Color.fromRGBO(217,180,111, .9),
   900:Color.fromRGBO(217,180,111, 1),
 };
-
+//waar die color func assign word
 MaterialColor colorCustom = MaterialColor(0xFFd9b46f, color);
-
+//color insert word
 const PrimaryColorTwo = const Color(0xFFd9b46f);
 
-class Home extends StatefulWidget {
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final AuthService _auth = AuthService();
+Future<void> _Alert(BuildContext context) {
 
 
 
-  @override
-  Widget build(BuildContext context) {
-    // StreamProvider<QuerySnapShot>.value(       //he used brew in stead of user
-    //       value: DatabaseService().Booking,    
+
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Panic Alert'),
+        content: const Text('This will send out a location to emergency contacts. Are you sure you you want to proceed?'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Yes'),
+            onPressed: () {
+               Navigator.of(context).pop();
+               if ( lat!= null)
+                 {
+                   print(lat +' '+Lng);
+
+                 }
 
 
-    return Scaffold(
-          backgroundColor: Colors.blue[50],
-          appBar: AppBar(
-            title: Text('Home Page'),
-            backgroundColor: Colors.blue[200],
-            elevation: 0.0,
-            actions: <Widget>[
-              FlatButton.icon(
-                label: Text('Log Out'),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-                 
-              )
-            ],
+
+            },
           ),
-          body: BookingList(),
+          FlatButton(
+            child: Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop();
 
-//hier kom die nav bar
-  //          int currentIndex = 0;
-  // int _currentIndex = 0;
 
-          bottomNavigationBar: BottomNavyBar(
-             selectedIndex: _currentIndex,
-             showElevation: true,
-             itemCornerRadius: 8,
-             onItemSelected: (index) {
-               setState(() => 
-               _currentIndex = index);
-             },
-             items: [
-               BottomNavyBarItem(
-                 icon: Icon(Icons.home),
-                 title: Text('Home'),
-                 activeColor: Colors.blue,
-               ),
-              //  BottomNavyBarItem(
-              //    icon: Icon(Icons.mail),
-              //    title: Text('Messages'),
-              //    activeColor: colorCustom,
-              //  ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.person),
-                 title: Text('Bookings'),
-                 activeColor: Colors.black,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.report_problem),
-                 title: Text('Report'),
-                 activeColor: Colors.red,
-               ),
-               BottomNavyBarItem(
-                 icon: Icon(Icons.local_activity),
-                 title: Text('Facilities'),
-                 activeColor: Colors.green,
-               ),
-             ]
-          ),
+            },
+          )
+        ],
       );
-  }
+    },
+  );
 }
