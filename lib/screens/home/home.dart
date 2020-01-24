@@ -1,4 +1,7 @@
 import 'package:communityapp/models/booking.dart';
+import 'package:communityapp/models/user.dart';
+import 'package:communityapp/screens/bookings/page.dart';
+import 'package:communityapp/screens/home/Report.dart';
 import 'package:communityapp/screens/home/booking_list.dart';
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +12,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'package:communityapp/shared/nav.dart';
 import 'post_page.dart';
-
+import 'package:communityapp/screens/bookings/Gridview.dart';
+import 'package:communityapp/screens/bookings/page.dart';
 
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
 bool FlagLoc = false;
+final databaseReference = Firestore.instance;
 
 class Main extends StatelessWidget {
 
@@ -54,9 +59,10 @@ class _MyHomePageState extends State<MyHomePage>  {
  Position _currentPosition;
   final List<Widget> _children = [
     NewsPG(title: "Home Page"),
-    // MesgPg(),
-    // MyHomePageProfile(),
-    // ReportPg(),
+     MyHomePageProfile(),
+     ReportPg(),
+     Facilities(),
+     
     // Facilities()
 
   ];
@@ -65,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
   @override
   Widget build(BuildContext context)  {
-   //getDataF();
+   getDataF();
     _getCurrentLocation();
 
 
@@ -81,8 +87,19 @@ class _MyHomePageState extends State<MyHomePage>  {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            FlatButton.icon(
+                padding: new EdgeInsets.symmetric(
+                horizontal: 50.0, vertical: 0.0
+              ),
+                label: Text('Log Out'),
+                icon: Icon(Icons.person),
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ),
+
         Padding(
-        padding: const EdgeInsets.all(20.0)),
+        padding: const EdgeInsets.all(0)),
             Image.asset(
               'Assets/vLogo.png',
               fit: BoxFit.contain,
@@ -96,41 +113,23 @@ class _MyHomePageState extends State<MyHomePage>  {
           actions: <Widget>[
       // action button
 
-            FlatButton.icon(
-                label: Text('Log Out'),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-             ), 
+ 
 
       IconButton(
       icon: Icon(Icons.error_outline),
       onPressed: () {
-
         _Alert(context);
-
-
            _getCurrentLocation();
-
-
           if (_currentPosition != null)
             {
-
               lat="LAT: ${_currentPosition.latitude}" ;
               Lng= "LNG: ${_currentPosition.longitude}";
             }
-
-
-
-
-
-
-
-
       },
     ),]
       ),
+
+
       body:  _children[_currentIndex],
 
       bottomNavigationBar: BottomNavyBar(
@@ -147,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage>  {
             activeColor: Colors.blue,
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.bookmark),
             title: Text('Bookings'),
             activeColor: Colors.black,
           ),
@@ -225,7 +224,10 @@ Future<void> _Alert(BuildContext context) {
                if ( lat!= null)
                  {
                    print(lat +' '+Lng);
-
+                  databaseReference.collection('Panic').document()
+                  .setData({ 'Date': Timestamp.now(),'Location':
+                  lat.toString()+' '+Lng.toString(),
+                  'UserID':User});
                  }
 
 
