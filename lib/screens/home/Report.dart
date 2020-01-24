@@ -153,16 +153,7 @@ class ReportPgState extends State<ReportPg> {
                             icon:  Icon(Icons.photo),
                             label: new Text('Upload Photo'),
                           )),
-            FlatButton.icon(
-                padding: new EdgeInsets.symmetric(
-                horizontal: 10.0, vertical: 0.0
-              ),
-                label: Text('Log Out'),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-             ),
+           
                       ButtonTheme(
                           minWidth: 150.0,
                           height: 36.0,
