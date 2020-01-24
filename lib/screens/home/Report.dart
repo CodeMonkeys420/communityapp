@@ -20,8 +20,8 @@ var imagepath;
 var department='IT';
 var description;
 var location;
-var longitude;
-var latitude;
+var long;
+var lat;
 var currentUser=UserID;
 
 class ReportPg extends StatefulWidget {
@@ -59,7 +59,7 @@ class ReportPgState extends State<ReportPg> {
    //   });
   //  }
 
-  
+   _getCurrentLocation();
    return new Scaffold(
 
 
@@ -160,7 +160,7 @@ class ReportPgState extends State<ReportPg> {
                             textColor: Colors.white,
                             color: Colors.amber,
                             onPressed:() {
-
+                               
                               description= myControllerDescription.text;
 
                                 _getCurrentLocation();
@@ -169,8 +169,8 @@ class ReportPgState extends State<ReportPg> {
 
 
                                 print("LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");}
-                               latitude = _currentPosition.latitude;
-                               longitude = _currentPosition.longitude;
+                               lat = _currentPosition.latitude;
+                               long = _currentPosition.longitude;
 
 
 
@@ -180,6 +180,7 @@ class ReportPgState extends State<ReportPg> {
                                }else
                                {createRecord();
                                _ackAlertSub(context);
+
                                }
                               
 
@@ -245,10 +246,10 @@ void createRecord() async{
 
 var now = new DateTime.now();
 
- databaseReference.collection('Reports').document()
+ databaseReference.collection('Report').document()
  .setData({ 'Date': now, 'Department': department , 
- 'Description':description, 'Location':'Latitude: ' +latitude.toString()+
- ' Longitude: '+longitude.toString(),'UserID':currentUser});
+ 'Description':description, 'Location':'Latitude: ' +lat.toString()+
+ ' Longitude: '+long.toString(),'UserID':currentUser});
 
 
 
