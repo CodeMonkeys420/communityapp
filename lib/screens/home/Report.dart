@@ -1,3 +1,4 @@
+import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:communityapp/main.dart';
@@ -20,6 +21,8 @@ var location;
 var longitude;
 var latitude;
 var currentUser='/Users/LyAhgM0Du7ajtAhEEYkW';
+
+final AuthService _auth = AuthService();
 
 class ReportPg extends StatefulWidget {
   @override
@@ -147,7 +150,16 @@ class ReportPgState extends State<ReportPg> {
                             icon:  Icon(Icons.photo),
                             label: new Text('Upload Photo'),
                           )),
-
+            FlatButton.icon(
+                padding: new EdgeInsets.symmetric(
+                horizontal: 10.0, vertical: 0.0
+              ),
+                label: Text('Log Out'),
+                icon: Icon(Icons.person),
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ),
                       ButtonTheme(
                           minWidth: 150.0,
                           height: 36.0,
