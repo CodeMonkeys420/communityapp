@@ -11,6 +11,9 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:path/path.dart';
+import 'package:communityapp/screens/home/home.dart';
+
+import 'home.dart';
 final databaseReference = Firestore.instance;
 String dropdownValue = 'IT';
 var imagepath;
@@ -19,7 +22,7 @@ var description;
 var location;
 var longitude;
 var latitude;
-var currentUser='/Users/LyAhgM0Du7ajtAhEEYkW';
+var currentUser=UserID;
 
 class ReportPg extends StatefulWidget {
   @override
@@ -134,7 +137,7 @@ class ReportPgState extends State<ReportPg> {
                           new RaisedButton.icon(
 
                             textColor: Colors.white,
-                            color: colorCustom,
+                            color: Colors.amber,
                             onPressed:() {
                               //uploadPic(context);
                               getImage();
@@ -155,7 +158,7 @@ class ReportPgState extends State<ReportPg> {
                           new RaisedButton.icon(
 
                             textColor: Colors.white,
-                            color: colorCustom,
+                            color: Colors.amber,
                             onPressed:() {
 
                               description= myControllerDescription.text;
@@ -243,7 +246,9 @@ void createRecord() async{
 var now = new DateTime.now();
 
  databaseReference.collection('Reports').document()
- .setData({ 'Date': now, 'Department': department , 'Description':description, 'Location':'Latitude: ' +latitude.toString()+' Longitude: '+longitude.toString(),'UserID':currentUser});
+ .setData({ 'Date': now, 'Department': department , 
+ 'Description':description, 'Location':'Latitude: ' +latitude.toString()+
+ ' Longitude: '+longitude.toString(),'UserID':currentUser});
 
 
 

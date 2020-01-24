@@ -2,18 +2,18 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:communityapp/main.dart';
+import '../home/home.dart';
 import 'Bookings.dart';
 import 'Facility.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:communityapp/screens/home/home.dart';
 var dbFacList = new List();
 var iDFacList = new List();
 final databaseReference = Firestore.instance;
 
-var id = 'LyAhgM0Du7ajtAhEEYkW';
-var userID = '/Users/'+id;
-var name ='Kyle Potgieter' ;
-var details ='Snowboarder, Superhero and writer.\nSometime I work at google as Executive Chairman ';
- var imgUrl = 'https://pixel.nymag.com/imgs/daily/selectall/2017/12/26/26-eric-schmidt.w700.h700.jpg';
+var id = UserID;
+
+
 class MyHomePageProfile extends StatefulWidget {
   @override
   MyHomePageState createState() => MyHomePageState();
@@ -192,7 +192,7 @@ Card userData(var facility , var date , var ammountP ,var iD,var docId, var time
 var facName;
 var placeholderID;
  //getDataF();
-if(iD == userID){
+if(iD == id){
 
 
 placeholderID=iDFacList.indexOf(facility);
