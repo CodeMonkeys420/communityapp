@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:spinner_input/spinner_input.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart' show DateFormat;
-
+import 'package:communityapp/screens/home/home.dart';
 
 final databaseReference = Firestore.instance;
 var time;
@@ -24,7 +24,7 @@ var IdexCounter=1;
 var imagePath;
 var FacilityReference;
 var price;
-var UserID;
+var userIDBookings=UserID;
 String FacilityID;
 
 String sanitizeDateTime(DateTime dateTime) => "${dateTime.year}-${dateTime.month}-${dateTime.day}";
@@ -115,7 +115,7 @@ crossAxisSpacing: 2,
             new RaisedButton.icon(
 
             textColor: Colors.white,
-            color: colorCustom,
+            color: Colors.amber,
             onPressed:(){ booking = index;
 
             if(booking==0){
@@ -541,7 +541,7 @@ class bookingPageState extends State<bookingPage> {
                         new RaisedButton.icon(
 
                           textColor: Colors.white,
-                          color: colorCustom,
+                          color: Colors.amber,
                           onPressed:(){
                          
 
@@ -811,7 +811,7 @@ class bookSpotState extends State<bookSpot> {
                               new RaisedButton.icon(
 
                                 textColor: Colors.white,
-                                color: colorCustom,
+                                color: Colors.amber,
                                 onPressed:()async{
 
 
@@ -847,7 +847,7 @@ class bookSpotState extends State<bookSpot> {
                                         {
 
                                        
-                                             UserID='/Users/LyAhgM0Du7ajtAhEEYkW' ;
+                                             
                                             price = 0;         //defualt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                             var counter = 0 ;
                                                       
@@ -891,7 +891,7 @@ class bookSpotState extends State<bookSpot> {
                                                       await databaseReference.collection("Bookings").add({ 
                                                         'AmmountPeople': AmmountOfPeople,'Date': bookingsDate.toString(),'Time':time,
                                                        'FacilityID': FacilityReference
-                                                        ,'Price': price,'UserID': UserID});
+                                                        ,'Price': price,'UserID': userIDBookings});
                                                         
 
 

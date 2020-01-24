@@ -14,7 +14,7 @@ import 'package:communityapp/shared/nav.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 import 'package:communityapp/screens/bookings/page.dart';
-
+var UserID ;
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
 bool FlagLoc = false;
@@ -225,7 +225,7 @@ Future<void> _Alert(BuildContext context) {
                   databaseReference.collection('Panic').document()
                   .setData({ 'Date': Timestamp.now(),'Location':
                   lat.toString()+' '+Lng.toString(),
-                  'UserID':User});
+                  'UserID':UserID});
                  }
 
 
@@ -244,4 +244,16 @@ Future<void> _Alert(BuildContext context) {
       );
     },
   );
+}
+
+
+
+
+ class userId {
+
+userId(var id ){
+
+UserID = id;
+}
+
 }

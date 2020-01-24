@@ -1,12 +1,15 @@
 import 'package:communityapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:communityapp/screens/home/home.dart';
 class AuthService{
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 //create user onject based on firebase user
 User _userFromFirebaseUser(FirebaseUser user){
+ // print(user.uid);
+  userId(user.uid);
+  
   return user != null ? User(uid: user.uid) : null;
 
 }
