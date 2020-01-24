@@ -25,7 +25,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Demo App',
+      title: 'community app',
       theme: ThemeData(
         primarySwatch: colorCustom,
       ),
@@ -86,9 +86,7 @@ class _MyHomePageState extends State<MyHomePage>  {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlatButton.icon(
-                padding: new EdgeInsets.symmetric(
-                horizontal: 50.0, vertical: 0.0
-              ),
+                padding: const EdgeInsets.only(right: 50.0),
                 label: Text('Log Out'),
                 icon: Icon(Icons.person),
                 onPressed: ()async {
@@ -96,13 +94,13 @@ class _MyHomePageState extends State<MyHomePage>  {
                 },
              ),
 
-        Padding(
-        padding: const EdgeInsets.all(0)),
+
             Image.asset(
               'Assets/vLogo.png',
               fit: BoxFit.contain,
               height: 20,
               scale: 1,
+              alignment: Alignment.topCenter,
             ),
   
           ],
@@ -113,8 +111,10 @@ class _MyHomePageState extends State<MyHomePage>  {
 
  
 
+
       IconButton(
       icon: Icon(Icons.error_outline),
+      padding: const EdgeInsets.only(left: 80.0,right: 15.0),
       onPressed: () {
         _Alert(context);
            _getCurrentLocation();
