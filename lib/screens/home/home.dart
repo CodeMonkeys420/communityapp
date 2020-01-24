@@ -86,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage>  {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlatButton.icon(
-                padding: const EdgeInsets.only(right: 50.0),
-                label: Text('Log Out'),
+                padding: const EdgeInsets.only(right: 60.0),
+                 label: Text(''),
                 icon: Icon(Icons.person),
                 onPressed: ()async {
                    await _auth.signOut();
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
       IconButton(
       icon: Icon(Icons.error_outline),
-      padding: const EdgeInsets.only(left: 80.0,right: 15.0),
+      padding: const EdgeInsets.only(left: 50.0,right: 20.0),
       onPressed: () {
         _Alert(context);
            _getCurrentLocation();
