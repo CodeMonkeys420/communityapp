@@ -62,8 +62,6 @@ class _MyHomePageState extends State<MyHomePage>  {
      MyHomePageProfile(),
      ReportPg(),
      Facilities(),
-     
-    // Facilities()
 
   ];
 
