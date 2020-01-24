@@ -12,20 +12,15 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'package:communityapp/screens/home/home.dart';
-
-import 'home.dart';
 final databaseReference = Firestore.instance;
 String dropdownValue = 'IT';
 var imagepath;
 var department='IT';
 var description;
 var location;
-var long;
-var lat;
-var currentUser=UserID;
-
-final AuthService _auth = AuthService();
+var longitude;
+var latitude;
+var currentUser='/Users/LyAhgM0Du7ajtAhEEYkW';
 
 class ReportPg extends StatefulWidget {
   @override
@@ -62,7 +57,7 @@ class ReportPgState extends State<ReportPg> {
    //   });
   //  }
 
-   _getCurrentLocation();
+  
    return new Scaffold(
 
 
@@ -140,7 +135,7 @@ class ReportPgState extends State<ReportPg> {
                           new RaisedButton.icon(
 
                             textColor: Colors.white,
-                            color: Colors.amber,
+                            color: colorCustom,
                             onPressed:() {
                               //uploadPic(context);
                               getImage();
@@ -153,16 +148,7 @@ class ReportPgState extends State<ReportPg> {
                             icon:  Icon(Icons.photo),
                             label: new Text('Upload Photo'),
                           )),
-            FlatButton.icon(
-                padding: new EdgeInsets.symmetric(
-                horizontal: 10.0, vertical: 0.0
-              ),
-                label: Text('Log Out'),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-             ),
+
                       ButtonTheme(
                           minWidth: 150.0,
                           height: 36.0,
@@ -170,9 +156,9 @@ class ReportPgState extends State<ReportPg> {
                           new RaisedButton.icon(
 
                             textColor: Colors.white,
-                            color: Colors.amber,
+                            color: colorCustom,
                             onPressed:() {
-                               
+
                               description= myControllerDescription.text;
 
                                 _getCurrentLocation();
@@ -181,8 +167,8 @@ class ReportPgState extends State<ReportPg> {
 
 
                                 print("LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");}
-                               lat = _currentPosition.latitude;
-                               long = _currentPosition.longitude;
+                               latitude = _currentPosition.latitude;
+                               longitude = _currentPosition.longitude;
 
 
 
@@ -192,7 +178,6 @@ class ReportPgState extends State<ReportPg> {
                                }else
                                {createRecord();
                                _ackAlertSub(context);
-
                                }
                               
 
@@ -258,10 +243,8 @@ void createRecord() async{
 
 var now = new DateTime.now();
 
- databaseReference.collection('Report').document()
- .setData({ 'Date': now, 'Department': department , 
- 'Description':description, 'Location':'Latitude: ' +lat.toString()+
- ' Longitude: '+long.toString(),'UserID':currentUser});
+ databaseReference.collection('Reports').document()
+ .setData({ 'Date': now, 'Department': department , 'Description':description, 'Location':'Latitude: ' +latitude.toString()+' Longitude: '+longitude.toString(),'UserID':currentUser});
 
 
 
