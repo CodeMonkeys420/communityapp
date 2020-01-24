@@ -88,7 +88,8 @@ class _MyHomePageState extends State<MyHomePage>  {
             FlatButton.icon(
                 padding: const EdgeInsets.only(right: 60.0),
                  label: Text(''),
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.exit_to_app),
+               
                 onPressed: ()async {
                    await _auth.signOut();
                 },
