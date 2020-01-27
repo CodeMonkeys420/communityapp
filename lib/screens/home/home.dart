@@ -85,14 +85,7 @@ class _MyHomePageState extends State<MyHomePage>  {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FlatButton.icon(
-                padding: const EdgeInsets.only(right: 60.0),
-                 label: Text(''),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-             ),
+           
 
 
             Image.asset(

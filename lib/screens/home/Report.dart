@@ -131,7 +131,14 @@ class ReportPgState extends State<ReportPg> {
                           )])
 
                                              ,
-
+ FlatButton.icon(
+                padding: const EdgeInsets.only(right: 60.0),
+                 label: Text('Log Out'),
+                icon: Icon(Icons.person),
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ),
 
                       ButtonTheme(
                           minWidth: 150.0,
