@@ -2,7 +2,7 @@ import 'package:communityapp/models/booking.dart';
 import 'package:communityapp/models/user.dart';
 import 'package:communityapp/screens/bookings/page.dart';
 import 'package:communityapp/screens/home/Report.dart';
-import 'package:communityapp/screens/home/booking_list.dart';
+
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:communityapp/services/database.dart';
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
  Position _currentPosition;
   final List<Widget> _children = [
-    NewsPG(title: "Home Page"),
+    NewsPG(),
      MyHomePageProfile(),
      ReportPg(),
      Facilities(),
