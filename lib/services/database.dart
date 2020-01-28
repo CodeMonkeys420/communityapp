@@ -6,9 +6,10 @@ import 'package:communityapp/screens/home/booking_list.dart';
 class DatabaseService {
   //collection reference
 final String uid;
-DatabaseService({ this.uid });
+DatabaseService({ this.uid});
 
   final CollectionReference userBookings = Firestore.instance.collection('Bookings');//table name
+  
   //user booking table in firebase
   // Future updateUserData(Int AmmountPeople, String Date, int Price, ) async{
    //   return await userBookings.document(uid).setData({

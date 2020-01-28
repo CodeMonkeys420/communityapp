@@ -14,6 +14,7 @@ import 'package:communityapp/shared/nav.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 import 'package:communityapp/screens/bookings/page.dart';
+
 var UserID ;
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
@@ -86,7 +87,14 @@ class _MyHomePageState extends State<MyHomePage>  {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            
-
+ FlatButton.icon(
+                padding: const EdgeInsets.only(right: 60.0),
+                 label: Text('Log Out'),
+                icon: Icon(Icons.person),
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ),
 
             Image.asset(
               'Assets/vLogo.png',

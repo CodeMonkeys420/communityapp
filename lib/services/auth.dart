@@ -5,11 +5,11 @@ class AuthService{
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-//create user onject based on firebase user
+//create user object based on firebase user
 User _userFromFirebaseUser(FirebaseUser user){
- // print(user.uid);
-  userId(user.uid);
-  
+  print(user.uid);
+   userId(user.uid);
+
   return user != null ? User(uid: user.uid) : null;
 
 }
