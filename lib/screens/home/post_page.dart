@@ -1,73 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
-
-
-class ContentPage extends StatelessWidget {
-  ContentPage({@required this.title});
-  final title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: Test(this.title)
-
-      ),
-    );
-  }
-}
-
-
-Column Test (var titlename){
-  if(titlename=='home')
-   {
-
-     return (Column(
-     children: <Widget>[Text(titlename)],
-  ));
-   }
-
-  else if(titlename=='home'){
-  return (Column(
-  children: <Widget>[Text(titlename)],
-  ));
-
-  }
-  else if(titlename=='example')
-{
-   return (Column(
-
-
-   ));
-
-}
-
-  else if(titlename=='Messages Page')
-  {
-    return (Column(
-      children: <Widget>[Text('Messages Page')],));
-
-  }
-  else if(titlename=='Calendar Page')
-  {
-    return (Column(
-      children: <Widget>[Text('Calendar Page')],));
-
-  }
-  else{
-
-    return (Column(
-      children: <Widget>[Text('Coming soon')],));
-  }
-}
-
-
-
-
+import 'package:provider/provider.dart';
+import 'package:communityapp/models/Posts.dart';
+final databaseReference = Firestore.instance;
+var headln;
+var author;
+var body;
+var datePosted;
 class NewsPG extends StatefulWidget {
-  NewsPG({Key key, this.title}) : super(key: key);
-final String title;
+
 
 @override
 NewsPGState createState() => NewsPGState();
@@ -84,15 +26,121 @@ class NewsPGState extends State<NewsPG> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.amber),
-      home: Scaffold(
-          backgroundColor: Colors.grey[200],
+     return StreamProvider<List<Posts>>.value(
+      value: DatabaseService().posts,
+      child: Scaffold(
+        
+        
+        body: Container(
+            
+            child: BrewList()
+          ),
+      ),
+    );
+  }
+}
 
-          body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Card(
+
+
+class DatabaseService {
+
+final CollectionReference postsCollection = Firestore.instance.collection('Post');
+
+
+  List<Posts> _postsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc){
+     print(doc.data.toString()+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      return Posts(
+        Author:   doc.data['Author'] ,
+        Body:   doc.data['Body'] ,
+        Date:   doc.data['Date'] ,
+        Headline:   doc.data['Headline'] ,
+        SubHeadline: doc.data['SubHeadline'],
+        DocIdPost:   doc.documentID.toString(),
+        
+      );
+    }).toList();
+  }
+
+  Stream<List<Posts>> get posts {
+    return postsCollection.snapshots()
+      .map(_postsFromSnapshot);
+  }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+class BrewList extends StatefulWidget {
+  @override
+  _BrewListState createState() => _BrewListState();
+}
+
+class _BrewListState extends State<BrewList> {
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    final posts = Provider.of<List<Posts>>(context) ?? [];
+     
+  
+
+    return ListView.builder(
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        return BrewTile(posts:  posts[index]);
+      },
+    );
+  }
+
+
+}
+
+
+class BrewTile extends StatelessWidget {
+
+  final Posts posts;
+  BrewTile({ this.posts });
+
+  @override
+  Widget build(BuildContext context) {
+    
+
+    _onSelected(dynamic val) {
+
+    databaseReference
+.collection("Post")
+.getDocuments()
+.then((QuerySnapshot snapshot) {
+snapshot.documents.forEach((f) { 
+if(val==f.documentID){
+headln= f.data['Headline'];
+datePosted=f.data['Date'];
+body = f.data['Body'];
+author=f.data['Author'];
+}
+
+});
+});
+Navigator.push(context, MaterialPageRoute(builder: (context) => NewsArticle()));
+  }
+return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: 
+    //PostData(posts.Author ,posts.Body,posts.Date,posts.DocIdPost,posts.Headline,posts.SubHeadline)
+    Card(
                     elevation: 3.0,
                     color: Colors.white,
                     margin: EdgeInsets.all(8.0),
@@ -101,78 +149,112 @@ class NewsPGState extends State<NewsPG> {
                       children: <Widget>[
                         SizedBox(height: 0.0,),
                         Image.asset('Assets/61htWk5w.jpg'),
-                        SizedBox(height: 16.0,),
-                        Row(
-                          children: <Widget>[
-                            SizedBox(width: 16.0,),
-                            Text('HEADLINE', style: Theme.of(context).textTheme.headline,),
-                            SizedBox(width: 16.0,),
-                            Text('subhead of news article', style: Theme.of(context).textTheme.subhead,),
+                        SizedBox(height: 12.0,),
+                        ListTile(
+          title: Text(posts.Headline),
 
+          subtitle: Text(posts.SubHeadline),
+             trailing: PopupMenuButton(
+            onSelected: _onSelected,
+            icon: Icon(Icons.menu),
+            itemBuilder: (context) => [
 
-                          ],
-
-                        ),
-                        SizedBox(height: 16.0,),
-                      ],
-
-                    ),
-                  ),
-                  Card(
-                    elevation: 3.0,
-                    color: Colors.white,
-                    margin: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: 0.0,),
-                        Image.asset('Assets/Sunset-001-1024x682.jpg.jpeg'),
-                        SizedBox(height: 16.0,),
-                        Row(
-                          children: <Widget>[
-                            SizedBox(width: 16.0,),
-                            Text('HEADLINE', style: Theme.of(context).textTheme.headline,),
-                            SizedBox(width: 16.0,),
-                            Text('subhead of news article', style: Theme.of(context).textTheme.subhead,),
-
-
-                          ],
-
-                        ),
+              PopupMenuItem(
+                value: posts.DocIdPost,
+                child: Text("View"),
+                
+              ),
+            ],
+          ),
+        ),
                         SizedBox(height: 16.0,),
                       ],
 
                     ),
                   ),
-                  Card(
-                    elevation: 3.0,
-                    color: Colors.white,
-                    margin: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: 0.0,),
-                        Image.asset('Assets/Val-De-Vie-Aerial-20-1024x575.jpg.jpeg'),
-                        SizedBox(height: 16.0,),
-                        Row(
-                          children: <Widget>[
-                            SizedBox(width: 16.0,),
-                            Text('HEADLINE', style: Theme.of(context).textTheme.headline,),
-                            SizedBox(width: 16.0,),
-                            Text('subhead of news article', style: Theme.of(context).textTheme.subhead,),
+    );
+    
+  }
+
+}
 
 
-                          ],
 
-                        ),
-                        SizedBox(height: 16.0,),
-                      ],
 
-                    ),
-                  )],
+
+
+class NewsArticle extends StatefulWidget {
+  @override
+  _NewsArticleState createState() => _NewsArticleState();
+}
+
+class _NewsArticleState extends State<NewsArticle> {
+
+final Posts article;
+  _NewsArticleState({ this.article });
+
+
+  @override
+  Widget build(BuildContext context) {
+
+   return new  Scaffold(
+appBar: AppBar(
+title: Text('Article'),
+
+),
+body: GridView.count(
+crossAxisCount: 1,
+
+ children: List.generate(1, (index)
+          {
+
+
+        return new Column(
+            children: <Widget>[
+
+              Text(
+                headln,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+              ), 
+               
+              SizedBox(
+              child: Text(
+                  body,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
+              ),
+               SizedBox(
+              child: Text(
+                  author,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
+              ),
+
+               SizedBox(
+              child: Text(
+                  datePosted,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
               )
-          )
-      ),
+
+            ]);
+
+
+
+          })
+
+),
+
     );
   }
+
+
 }

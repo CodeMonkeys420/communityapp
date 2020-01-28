@@ -24,7 +24,8 @@ var location;
 var long;
 var lat;
 var currentUser=UserID;
-
+  String attachment;
+  bool isHTML = false;
 final AuthService _auth = AuthService();
 
 class ReportPg extends StatefulWidget {
@@ -34,6 +35,44 @@ class ReportPg extends StatefulWidget {
 
 
 class ReportPgState extends State<ReportPg> {
+
+final _recipientController = TextEditingController(
+    text: 'kylechrispotgieter@gmail.com',
+  );
+
+  final _subjectController = TextEditingController(text: 'Report');
+
+  final _bodyController = TextEditingController(
+    text: 'The following report has been submited:',
+  );
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+ Future<void> send() async {
+    final Email email = Email(
+      body: _bodyController.text+' '+myControllerDescription.text,
+      subject: _subjectController.text,
+      recipients: [_recipientController.text],
+      attachmentPath: attachment,
+      isHTML: isHTML,
+    );
+
+    String platformResponse;
+
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
+    }
+
+    if (!mounted) return;
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(platformResponse),
+    ));
+  }
+
+
   final myControllerDescription = TextEditingController();
   final myControllerSurname = TextEditingController();
   final myController = TextEditingController();
@@ -41,6 +80,10 @@ class ReportPgState extends State<ReportPg> {
   File _image;
   @override
   Widget build(BuildContext context) {
+final Widget imagePath = Text(attachment ?? '');
+
+
+
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -48,23 +91,16 @@ class ReportPgState extends State<ReportPg> {
         _image = image;
         print('Image Path $_image');
         imagepath=_image;
+        attachment = _image.path;
       });
     }
 
-  //  Future uploadPic(BuildContext context) async{
-    //  String fileName = basename(_image.path);
-    //  StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
-    //  StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-   //   StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-     // setState(() {
-     //   print("Profile Picture uploaded");
-    //    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-   //   });
-  //  }
+
 
    _getCurrentLocation();
    return new Scaffold(
 
+          key: _scaffoldKey,
 
         body: GridView.count(
 
@@ -164,6 +200,8 @@ class ReportPgState extends State<ReportPg> {
                             color: Colors.amber,
                             onPressed:() {
                                
+                                  
+
                               description= myControllerDescription.text;
 
                                 _getCurrentLocation();
@@ -183,7 +221,7 @@ class ReportPgState extends State<ReportPg> {
                                }else
                                {createRecord();
                                _ackAlertSub(context);
-
+                                send();
                                }
                              
 
@@ -323,6 +361,15 @@ Future<void> _ackAlertSub(BuildContext context) {
 
 
 
+
+class FlutterEmailSender {
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_email_sender');
+
+  static Future<void> send(Email mail) {
+    return _channel.invokeMethod('send', mail.toJson());
+  }
+}
 
 class Email {
   final String subject;

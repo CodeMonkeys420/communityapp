@@ -2,7 +2,7 @@ import 'package:communityapp/models/booking.dart';
 import 'package:communityapp/models/user.dart';
 import 'package:communityapp/screens/bookings/page.dart';
 import 'package:communityapp/screens/home/Report.dart';
-import 'package:communityapp/screens/home/booking_list.dart';
+
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:communityapp/services/database.dart';
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
  Position _currentPosition;
   final List<Widget> _children = [
-    NewsPG(title: "Home Page"),
+    NewsPG(),
      MyHomePageProfile(),
      ReportPg(),
      Facilities(),
@@ -87,14 +87,20 @@ class _MyHomePageState extends State<MyHomePage>  {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            
- FlatButton.icon(
-                padding: const EdgeInsets.only(right: 60.0),
-                 label: Text('Log Out'),
-                icon: Icon(Icons.person),
-                onPressed: ()async {
-                   await _auth.signOut();
-                },
-             ),
+//  FlatButton.icon(
+//                 padding: const EdgeInsets.only(right: 60.0),
+// <<<<<<< Postsv2
+//                  label: Text(''),
+//                 icon: Icon(Icons.exit_to_app),
+               
+// =======
+//                  label: Text('Log Out'),
+//                 icon: Icon(Icons.person),
+// >>>>>>> master
+//                 onPressed: ()async {
+//                    await _auth.signOut();
+//                 },
+//              ),
 
             Image.asset(
               'Assets/vLogo.png',
