@@ -7,6 +7,7 @@ final databaseReference = Firestore.instance;
 var headln;
 var author;
 var body;
+var datePosted;
 class NewsPG extends StatefulWidget {
 
 
@@ -126,8 +127,9 @@ class BrewTile extends StatelessWidget {
 snapshot.documents.forEach((f) { 
 if(val==f.documentID){
 headln= f.data['Headline'];
-print(headln.toString()+'!!!!!!!!!!!!!!!!!!!!!');
+datePosted=f.data['Date'];
 body = f.data['Body'];
+author=f.data['Author'];
 }
 
 });
@@ -191,7 +193,7 @@ final Posts article;
 
    return new  Scaffold(
 appBar: AppBar(
-title: Text('hello'),
+title: Text('Article'),
 
 ),
 body: GridView.count(
@@ -201,28 +203,43 @@ crossAxisCount: 1,
           {
 
 
-        return Center(
-                child:
-                new Column(
-                    children: <Widget>[
+        return new Column(
+            children: <Widget>[
 
-                      Text(
-                        headln,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
-                      ), 
-                       
-                      SizedBox(
-                      child: Text(
-                          body,
-                          textAlign: TextAlign.left,
-                          
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
-                        ),
-                      )
+              Text(
+                headln,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+              ), 
+               
+              SizedBox(
+              child: Text(
+                  body,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
+              ),
+               SizedBox(
+              child: Text(
+                  author,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
+              ),
 
-                    ]));
+               SizedBox(
+              child: Text(
+                  datePosted,
+                  textAlign: TextAlign.left,
+                  
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                ),
+              )
+
+            ]);
 
 
 
