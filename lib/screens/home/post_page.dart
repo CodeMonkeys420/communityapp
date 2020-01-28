@@ -32,9 +32,9 @@ class NewsPGState extends State<NewsPG> {
         
         
         body: Container(
-          
-          child: BrewList()
-        ),
+            
+            child: BrewList()
+          ),
       ),
     );
   }
@@ -141,9 +141,18 @@ return Padding(
       child: 
     //PostData(posts.Author ,posts.Body,posts.Date,posts.DocIdPost,posts.Headline,posts.SubHeadline)
     Card(
-        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-        child: ListTile(
+                    elevation: 3.0,
+                    color: Colors.white,
+                    margin: EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 0.0,),
+                        Image.asset('Assets/61htWk5w.jpg'),
+                        SizedBox(height: 12.0,),
+                        ListTile(
           title: Text(posts.Headline),
+
           subtitle: Text(posts.SubHeadline),
              trailing: PopupMenuButton(
             onSelected: _onSelected,
@@ -158,19 +167,16 @@ return Padding(
             ],
           ),
         ),
-      )
+                        SizedBox(height: 16.0,),
+                      ],
+
+                    ),
+                  ),
     );
     
   }
 
 }
-
-
-
-
-
-
-
 
 
 
