@@ -7,10 +7,13 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 
 //create user object based on firebase user
 User _userFromFirebaseUser(FirebaseUser user){
-  print(user.uid);
-   userId(user.uid);
 
+  //  userId(user.uid);
+
+  // return user != null ? User(uid: user.uid) : null;
+  userId(user?.uid ?? "no user");
   return user != null ? User(uid: user.uid) : null;
+
 
 }
 
@@ -60,6 +63,7 @@ return null;
 
 }
 }
+
 
 //sign out
 Future signOut() async{

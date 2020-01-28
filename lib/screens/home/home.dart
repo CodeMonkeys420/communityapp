@@ -87,20 +87,17 @@ class _MyHomePageState extends State<MyHomePage>  {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            
-//  FlatButton.icon(
-//                 padding: const EdgeInsets.only(right: 60.0),
-// <<<<<<< Postsv2
-//                  label: Text(''),
-//                 icon: Icon(Icons.exit_to_app),
-               
-// =======
-//                  label: Text('Log Out'),
-//                 icon: Icon(Icons.person),
-// >>>>>>> master
-//                 onPressed: ()async {
-//                    await _auth.signOut();
-//                 },
-//              ),
+ FlatButton.icon(
+                padding: const EdgeInsets.only(right: 60.0),
+                 label: Text(''),
+                icon: Icon(Icons.exit_to_app),
+                //  label: Text('Log Out'),
+                // icon: Icon(Icons.person),
+
+                onPressed: ()async {
+                   await _auth.signOut();
+                },
+             ),
 
             Image.asset(
               'Assets/vLogo.png',
