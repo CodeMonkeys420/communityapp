@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 import 'package:spinner_input/spinner_input.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -583,6 +584,48 @@ class bookSpotState extends State<bookSpot> {
   var AmmountOfPeople=0;
   final myController = TextEditingController();
 
+
+
+
+
+final _recipientController = TextEditingController(
+    text: 'kylechrispotgieter@gmail.com',
+  );
+
+  final _subjectController = TextEditingController(text: 'Report');
+
+  final _bodyController = TextEditingController(
+    text: 'The following report has been submited:',
+  );
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+ Future<void> send() async {
+    final Email email = Email(
+      body: 'bookings were made for the following: '+AmmountOfPeople.toString()+' people at '+time.toString()+' on '+bookingsDate.toString(),
+      subject: 'bookings',
+      recipients: [_recipientController.text],
+     
+      isHTML: false,
+    );
+
+    String platformResponse;
+
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
+    }
+
+    if (!mounted) return;
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(platformResponse),
+    ));
+  }
+
+
+
   final formatH = DateFormat("yyyy-MM-dd");
 
   double spinner = 1;
@@ -623,7 +666,7 @@ class bookSpotState extends State<bookSpot> {
     new WillPopScope(
         onWillPop: _onWillPop,
         child : new Scaffold(
-
+         key: _scaffoldKey,
             appBar: AppBar(
               title: Text("Book"),
 
@@ -1278,4 +1321,46 @@ Future<void> _ackAlertBookingFull(BuildContext context) {
       );
     },
   );
+}
+
+
+
+class FlutterEmailSender {
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_email_sender');
+
+  static Future<void> send(Email mail) {
+    return _channel.invokeMethod('send', mail.toJson());
+  }
+}
+
+class Email {
+  final String subject;
+  final List<String> recipients;
+  final List<String> cc;
+  final List<String> bcc;
+  final String body;
+  
+  final bool isHTML;
+  Email({
+    this.subject = '',
+    this.recipients = const [],
+    this.cc = const [],
+    this.bcc = const [],
+    this.body = '',
+    
+    this.isHTML = false,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'subject': subject,
+      'body': body,
+      'recipients': recipients,
+      'cc': cc,
+      'bcc': bcc,
+     
+      'is_html': isHTML
+    };
+  }
 }
