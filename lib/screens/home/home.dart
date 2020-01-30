@@ -10,6 +10,7 @@ import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 import 'package:communityapp/screens/bookings/page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 var UserID ;
@@ -19,7 +20,18 @@ bool FlagLoc = false;
 final databaseReference = Firestore.instance;
 
 
-
+// class MyFirebaseMessagingService extends FirebaseMessagingService {
+//  final String TAG = "FCM Service";
+//  @Override
+//     public void onMessageReceived(RemoteMessage remoteMessage) {
+//         // TODO: Handle FCM messages here.
+//         // If the application is in the foreground handle both data and notification messages here.
+//         // Also if you intend on generating your own notifications as a result of a received FCM
+//         // message, here is where that should be initiated.
+//         Log.d(TAG, "From: " + remoteMessage.getFrom());
+//         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+//     }
+// }
 class Main extends StatelessWidget {
 
   @override
