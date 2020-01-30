@@ -1,16 +1,12 @@
-import 'package:communityapp/models/booking.dart';
-import 'package:communityapp/models/user.dart';
+
 import 'package:communityapp/screens/bookings/page.dart';
 import 'package:communityapp/screens/home/Report.dart';
-
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:communityapp/services/database.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/shared/bottom_navy_bar.dart';
-import 'package:communityapp/shared/nav.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 import 'package:communityapp/screens/bookings/page.dart';
@@ -59,13 +55,8 @@ var Lng ;
 // }
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
-
-
-
   @override
-  
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -83,11 +74,22 @@ class _MyHomePageState extends State<MyHomePage>  {
 
   ];
 
+static const platform = const MethodChannel('sendSms');
 
+  Future<Null> sendSms()async {
+    print("SendSMS");
+    try {
+      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."}); //Replace a 'X' with 10 digit phone number
+      print(result);
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context)  {
    getDataF();
+   getData();
     _getCurrentLocation();
 
 
@@ -143,6 +145,8 @@ class _MyHomePageState extends State<MyHomePage>  {
             {
               lat="LAT: ${_currentPosition.latitude}" ;
               Lng= "LNG: ${_currentPosition.longitude}";
+              print("panic!!!@!@!@!");
+              sendSms();
             }
       },
     ),]

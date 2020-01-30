@@ -1,7 +1,7 @@
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:communityapp/main.dart';
+
 
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-import 'package:path/path.dart';
+
 import 'package:communityapp/screens/home/home.dart';
 
 import 'home.dart';
@@ -89,14 +89,14 @@ final Widget imagePath = Text(attachment ?? '');
 
       setState(() {
         _image = image;
-        print('Image Path $_image');
+        //print('Image Path $_image');
         imagepath=_image;
         attachment = _image.path;
       });
     }
 
 
-
+ _getCurrentLocation();
    _getCurrentLocation();
    return new Scaffold(
 
@@ -207,7 +207,7 @@ final Widget imagePath = Text(attachment ?? '');
                                 _getCurrentLocation();
 
                               if (_currentPosition != null){
-
+                                
 
                                 print("LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");}
                                lat = _currentPosition.latitude;
@@ -221,6 +221,7 @@ final Widget imagePath = Text(attachment ?? '');
                                }else
                                {createRecord();
                                _ackAlertSub(context);
+                               print('!!!!!!!!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@'+attachment.toString());
                                 send();
                                }
                              
@@ -301,15 +302,7 @@ var now = new DateTime.now();
 }
 
 
-void getData() {
-databaseReference
-.collection("TestTabel")
-.getDocuments()
-.then((QuerySnapshot snapshot) {
-snapshot.documents.forEach((f) => print('${f.data}}'));
-});
 
-}
 
 
 Future<void> _ackAlertDes(BuildContext context) {
