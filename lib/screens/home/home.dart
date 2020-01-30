@@ -10,11 +10,27 @@ import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 
+
 var UserID ;
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
 bool FlagLoc = false;
 final databaseReference = Firestore.instance;
+
+
+// class MyFirebaseMessagingService extends FirebaseMessagingService {
+//  final String TAG = "FCM Service";
+//  @Override
+//     public void onMessageReceived(RemoteMessage remoteMessage) {
+//         // TODO: Handle FCM messages here.
+//         // If the application is in the foreground handle both data and notification messages here.
+//         // Also if you intend on generating your own notifications as a result of a received FCM
+//         // message, here is where that should be initiated.
+//         Log.d(TAG, "From: " + remoteMessage.getFrom());
+//         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+//     }
+// }
+
 class Main extends StatelessWidget {
 
   @override
@@ -32,6 +48,23 @@ class Main extends StatelessWidget {
 var lat ;
 var Lng ;
 
+
+// Future<void> initPlatformState() async {
+//      await OneSignal.shared.init(
+//   "865ce714-ac4e-4553-baf1-5e326bf2289f",//app id from onesignal
+//   // iOSSettings: {
+//   //   OSiOSSettings.autoPrompt: false,
+//   //   OSiOSSettings.inAppLaunchUrl: true
+//   // }
+// );
+// OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
+
+//     var settings = {
+//       OSiOSSettings.autoPrompt: false,
+//       OSiOSSettings.promptBeforeOpeningPushUrl: true
+//     };
+
+// }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
