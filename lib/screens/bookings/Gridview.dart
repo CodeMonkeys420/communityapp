@@ -936,7 +936,7 @@ final _recipientController = TextEditingController(
                                                        'FacilityID': FacilityReference
                                                         ,'Price': price,'UserID': userIDBookings});
                                                         
-
+                                                         send();
 
                                                               BookingName = '';
                                                               AmmountOfPeople=0;

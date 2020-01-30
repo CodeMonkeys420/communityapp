@@ -8,6 +8,13 @@ var headln;
 var author;
 var body;
 var datePosted;
+
+
+var headlnL = new List();
+var authorL = new List();
+var bodyL = new List();
+var iDL = new List();
+var datePostedL = new List();
 class NewsPG extends StatefulWidget {
 
 
@@ -49,14 +56,14 @@ final CollectionReference postsCollection = Firestore.instance.collection('Post'
 
   List<Posts> _postsFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc){
-     print(doc.data.toString()+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+   
       return Posts(
         Author:   doc.data['Author'] ,
         Body:   doc.data['Body'] ,
         Date:   doc.data['Date'] ,
         Headline:   doc.data['Headline'] ,
         SubHeadline: doc.data['SubHeadline'],
-        DocIdPost:   doc.documentID.toString(),
+        DocIdPost:   doc.documentID,
         
       );
     }).toList();
@@ -119,21 +126,35 @@ class BrewTile extends StatelessWidget {
     
 
     _onSelected(dynamic val) {
+    
 
     databaseReference
 .collection("Post")
 .getDocuments()
 .then((QuerySnapshot snapshot) {
 snapshot.documents.forEach((f) { 
-if(val==f.documentID){
-headln= f.data['Headline'];
-datePosted=f.data['Date'];
-body = f.data['Body'];
-author=f.data['Author'];
-}
+headlnL.add(f.data['Headline']);
+datePostedL.add(f.data['Headline']);
+bodyL.add(f.data['Body']);
+authorL.add(f.data['Author']);
+iDL.add(f.documentID);
+// if(val==f.documentID){
+//   print(f.documentID.toString());
+// headln= f.data['Headline'];
+// datePosted=f.data['Date'];
+// body = f.data['Body'];
+// author=f.data['Author'];
+// }
 
 });
 });
+
+var place = iDL.indexOf(val);
+headln= headlnL[place];
+datePosted= datePostedL[place];
+body= bodyL[place];
+author= authorL[place];
+print( author);
 Navigator.push(context, MaterialPageRoute(builder: (context) => NewsArticle()));
   }
 return Padding(
@@ -258,3 +279,21 @@ crossAxisCount: 1,
 
 
 }
+
+void getData() {
+databaseReference
+.collection("Post")
+.getDocuments()
+.then((QuerySnapshot snapshot) {
+snapshot.documents.forEach((f) { 
+headlnL.add(f.data['Headline']);
+datePostedL.add(f.data['Headline']);
+bodyL.add(f.data['Body']);
+authorL.add(f.data['Author']);
+iDL.add(f.documentID);
+
+
+});
+});
+}
+
