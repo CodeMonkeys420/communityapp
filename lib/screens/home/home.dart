@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
-import 'package:communityapp/screens/bookings/page.dart';
+
 
 var UserID ;
 final AuthService _auth = AuthService();
@@ -57,17 +57,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
   ];
 
-static const platform = const MethodChannel('sendSms');
 
-  Future<Null> sendSms()async {
-    print("SendSMS");
-    try {
-      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."}); //Replace a 'X' with 10 digit phone number
-      print(result);
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context)  {
@@ -128,8 +118,7 @@ static const platform = const MethodChannel('sendSms');
             {
               lat="LAT: ${_currentPosition.latitude}" ;
               Lng= "LNG: ${_currentPosition.longitude}";
-              print("panic!!!@!@!@!");
-              sendSms();
+              
             }
       },
     ),]
@@ -215,6 +204,17 @@ Future<void> _Alert(BuildContext context) {
 
 
 
+ const platform = const MethodChannel('sendSms');
+  Future<Null> sendSms()async {
+    
+    try {
+      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."});
+      print("SendSMS");
+      print(result);
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+  }
 
   return showDialog<void>(
     context: context,
@@ -234,6 +234,9 @@ Future<void> _Alert(BuildContext context) {
                   .setData({ 'Date': Timestamp.now(),'Location':
                   lat.toString()+' '+Lng.toString(),
                   'UserID':UserID});
+
+                  print("panic!!!@!@!@!");
+                   sendSms();
                  }
 
 

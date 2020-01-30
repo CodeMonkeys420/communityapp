@@ -79,14 +79,6 @@ final CollectionReference postsCollection = Firestore.instance.collection('Post'
 
 }
 
-
-
-
-
-
-
-
-
 class BrewList extends StatefulWidget {
   @override
   _BrewListState createState() => _BrewListState();
@@ -101,8 +93,7 @@ class _BrewListState extends State<BrewList> {
   Widget build(BuildContext context) {
 
     final posts = Provider.of<List<Posts>>(context) ?? [];
-     
-  
+
 
     return ListView.builder(
       itemCount: posts.length,
@@ -114,7 +105,6 @@ class _BrewListState extends State<BrewList> {
 
 
 }
-
 
 class BrewTile extends StatelessWidget {
 
@@ -134,17 +124,11 @@ class BrewTile extends StatelessWidget {
 .then((QuerySnapshot snapshot) {
 snapshot.documents.forEach((f) { 
 headlnL.add(f.data['Headline']);
-datePostedL.add(f.data['Headline']);
+datePostedL.add(f.data['Date']);
 bodyL.add(f.data['Body']);
 authorL.add(f.data['Author']);
 iDL.add(f.documentID);
-// if(val==f.documentID){
-//   print(f.documentID.toString());
-// headln= f.data['Headline'];
-// datePosted=f.data['Date'];
-// body = f.data['Body'];
-// author=f.data['Author'];
-// }
+
 
 });
 });
@@ -193,16 +177,9 @@ return Padding(
 
                     ),
                   ),
-    );
-    
+    );  
   }
-
 }
-
-
-
-
-
 
 class NewsArticle extends StatefulWidget {
   @override
@@ -225,11 +202,8 @@ title: Text('Article'),
 ),
 body: GridView.count(
 crossAxisCount: 1,
-
  children: List.generate(1, (index)
           {
-
-
         return new Column(
             children: <Widget>[
 
@@ -240,31 +214,51 @@ crossAxisCount: 1,
                 style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
               ), 
                
-              SizedBox(
-              child: Text(
-                  body,
-                  textAlign: TextAlign.left,
-                  
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+              Align(
+                alignment: Alignment.bottomLeft,
+                              child: Padding(
+                  padding: EdgeInsets.all(20),
+                                child: SizedBox(
+                  child: Text(
+                      body,
+                      textAlign: TextAlign.left,
+                      
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                    ),
+                  ),
                 ),
               ),
-               SizedBox(
-              child: Text(
-                  author,
-                  textAlign: TextAlign.left,
-                  
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
-                ),
+               Align(
+                 alignment: Alignment.centerLeft,
+                                child: SizedBox(
+              child: Padding
+              (
+                padding: EdgeInsets.all(20),
+                 child: Text(
+                      'Author: '+author,
+                      textAlign: TextAlign.left,
+                      
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                    ),
               ),
+              ),
+               ),
 
-               SizedBox(
-              child: Text(
-                  datePosted,
-                  textAlign: TextAlign.left,
-                  
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
-                ),
-              )
+               Align(
+                 alignment: Alignment.centerLeft,
+
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                            child: SizedBox(
+                       child: Text(
+                    'Date published: '+datePosted,
+                    textAlign: TextAlign.left,
+                    
+                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                  ),
+              ),
+                                ),
+               )
 
             ]);
 
@@ -287,12 +281,10 @@ databaseReference
 .then((QuerySnapshot snapshot) {
 snapshot.documents.forEach((f) { 
 headlnL.add(f.data['Headline']);
-datePostedL.add(f.data['Headline']);
+datePostedL.add(f.data['Date']);
 bodyL.add(f.data['Body']);
 authorL.add(f.data['Author']);
 iDL.add(f.documentID);
-
-
 });
 });
 }
