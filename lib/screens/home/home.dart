@@ -10,12 +10,15 @@ import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 import 'package:communityapp/screens/bookings/page.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 var UserID ;
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
 bool FlagLoc = false;
 final databaseReference = Firestore.instance;
+
+
 
 class Main extends StatelessWidget {
 
@@ -34,8 +37,22 @@ class Main extends StatelessWidget {
 var lat ;
 var Lng ;
 
+// Future<void> initPlatformState() async {
+//      await OneSignal.shared.init(
+//   "865ce714-ac4e-4553-baf1-5e326bf2289f",//app id from onesignal
+//   // iOSSettings: {
+//   //   OSiOSSettings.autoPrompt: false,
+//   //   OSiOSSettings.inAppLaunchUrl: true
+//   // }
+// );
+// OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
 
+//     var settings = {
+//       OSiOSSettings.autoPrompt: false,
+//       OSiOSSettings.promptBeforeOpeningPushUrl: true
+//     };
 
+// }
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
