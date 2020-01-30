@@ -10,13 +10,11 @@ import 'package:communityapp/shared/bottom_navy_bar.dart';
 import 'post_page.dart';
 import 'package:communityapp/screens/bookings/Gridview.dart';
 
-
 var UserID ;
 final AuthService _auth = AuthService();
 const PrimaryColor = const Color(0xFF151026);
 bool FlagLoc = false;
 final databaseReference = Firestore.instance;
-
 class Main extends StatelessWidget {
 
   @override
@@ -33,7 +31,6 @@ class Main extends StatelessWidget {
 
 var lat ;
 var Lng ;
-
 
 
 class MyHomePage extends StatefulWidget {
