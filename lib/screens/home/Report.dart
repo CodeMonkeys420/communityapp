@@ -1,19 +1,12 @@
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
-
-
-
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:image_picker/image_picker.dart';
-//import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-
 import 'package:communityapp/screens/home/home.dart';
-
 import 'home.dart';
 final databaseReference = Firestore.instance;
 String dropdownValue = 'IT';
@@ -80,10 +73,6 @@ final _recipientController = TextEditingController(
   File _image;
   @override
   Widget build(BuildContext context) {
-final Widget imagePath = Text(attachment ?? '');
-
-
-
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -112,12 +101,7 @@ final Widget imagePath = Text(attachment ?? '');
                 child:
                 new Column(
                     children: <Widget>[
-
-
-                         
-         
-
-                   
+      
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Description'
                         ),
@@ -178,7 +162,7 @@ final Widget imagePath = Text(attachment ?? '');
                             textColor: Colors.white,
                             color: Colors.amber,
                             onPressed:() {
-                              //uploadPic(context);
+                      
                               getImage();
                            
 
@@ -200,33 +184,27 @@ final Widget imagePath = Text(attachment ?? '');
                             color: Colors.amber,
                             onPressed:() {
                                
-                                  
-
+                                
                               description= myControllerDescription.text;
 
                                 _getCurrentLocation();
 
                               if (_currentPosition != null){
-                                
-
+                              
                                 print("LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");}
                                lat = _currentPosition.latitude;
                                long = _currentPosition.longitude;
-
-
-
                                if(description==''){
                                   _ackAlertDes(context);
 
                                }else
                                {createRecord();
                                _ackAlertSub(context);
-                               print('!!!!!!!!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@'+attachment.toString());
+                              // print('!!!!!!!!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@'+attachment.toString());
                                 send();
+                                myControllerDescription.clear();
                                }
                              
-
-
                             }
 
                             ,
@@ -234,31 +212,9 @@ final Widget imagePath = Text(attachment ?? '');
                             label: new Text('Submit'),
                           ))
 
-
-
-
-
-
-
-
-
-
                       ])
-
-
-
-
-
-
-
-
-
             );},
         )));
-
-
-
-
 
 
 
@@ -292,9 +248,6 @@ var now = new DateTime.now();
  .setData({ 'Date': now, 'Department': department ,
  'Description':description, 'Location':'Latitude: ' +lat.toString()+
  ' Longitude: '+long.toString(),'UserID':currentUser});
-
-
-
 
 //await FlutterEmailSender.send(email);
 
@@ -345,15 +298,6 @@ Future<void> _ackAlertSub(BuildContext context) {
     },
   );
 }
-
-
-
-
-
-
-
-
-
 
 class FlutterEmailSender {
   static const MethodChannel _channel =
