@@ -11,5 +11,6 @@ final String Category;
   final String Name;
   final int PricePP;
 final String DocIdFac;
-  Facility({ this.Category, this.ContactNum, this.Name, this.PricePP,this.DocIdFac});
+final String EmailFac;
+  Facility({ this.Category, this.ContactNum, this.Name, this.PricePP,this.DocIdFac,this.EmailFac});
 }

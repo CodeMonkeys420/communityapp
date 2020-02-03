@@ -592,16 +592,17 @@ final _recipientController = TextEditingController(
     text: 'kylechrispotgieter@gmail.com',
   );
 
-  final _subjectController = TextEditingController(text: 'Report');
+  final _subjectController = TextEditingController(text: 'Booking');
 
   final _bodyController = TextEditingController(
-    text: 'The following report has been submited:',
+    text: 'The following Bokkings has been Made:',
   );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
  Future<void> send() async {
     final Email email = Email(
-      body: 'bookings were made for the following: '+AmmountOfPeople.toString()+' people at '+time.toString()+' on '+bookingsDate.toString(),
+      body: 'bookings were made for the following: '+AmmountOfPeople.toString()+' people at '+time.toString()+' on '+bookingsDate.toString()+' for a '+myController.text
+      ,
       subject: 'bookings',
       recipients: [_recipientController.text],
      
@@ -934,7 +935,7 @@ final _recipientController = TextEditingController(
                                                       await databaseReference.collection("Bookings").add({ 
                                                         'AmmountPeople': AmmountOfPeople,'Date': bookingsDate.toString(),'Time':time,
                                                        'FacilityID': FacilityReference
-                                                        ,'Price': price,'UserID': userIDBookings});
+                                                        ,'Price': price,'UserID': userIDBookings,'Name':myController.text});
                                                         
                                                          send();
 

@@ -67,8 +67,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     compile 'com.google.firebase:firebase-core:9.2.0'                        // this line must be included to integrate with Firebase
     compile 'com.google.firebase:firebase-messaging:9.2.0'
-    compile 'com.google.android.gms:play-services-location:9.2.0'  
-    compile 'com.google.android.gms:play-services-places:9.2.0'
+   
     // implementation 'com.onesignal:OneSignal:[3.11.2, 3.99.99]'
     // api 'com.onesignal:OneSignal:3.12.5'
 }

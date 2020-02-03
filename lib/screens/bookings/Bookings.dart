@@ -13,9 +13,11 @@ final String UserID;
   final String FacilityID;
   final String DocID;
   final String Time;
+final String Name;
+
 
   
-  Booking({ this.UserID, this.Date, this.Price, this.AmmountPeople , this.FacilityID, this.DocID,this.Time});
+  Booking({ this.UserID, this.Date, this.Price, this.AmmountPeople , this.FacilityID, this.DocID,this.Time,this.Name});
 
 
   
