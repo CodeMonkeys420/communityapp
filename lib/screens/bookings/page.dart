@@ -78,7 +78,7 @@ final CollectionReference facilityCollection = Firestore.instance.collection('Fa
 
   List<Facility> _facilityListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc){
-      //print(doc.data);
+      
       return Facility(
         Category:  doc.data['Category'] ,
         ContactNum:  doc.data['ContactNum'] ,
@@ -100,7 +100,7 @@ final CollectionReference bookingsCollection = Firestore.instance.collection('Bo
   // brew list from snapshot
   List<Booking> _brewListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc){
-      //print(doc.data);
+      
       return Booking(
         UserID: doc.data['UserID'] ,
         AmmountPeople: doc.data['AmmountPeople'] ,
@@ -199,7 +199,7 @@ var Name = NameList[placeholderID];
 _recipientController.text= EmailList[placeholderID];
 
 _bodyController.text=_bodyController.text+Name.toString();
-  print(EmailList[place].toString()+'1111113132132123123123123132112321231');
+  
   databaseReference.collection("Bookings").document(val)
         .delete();
 
@@ -319,8 +319,7 @@ final _recipientController = TextEditingController(
     );
 
     String platformResponse;
-    //print(email.toJson());
-  //  print('1111111111111111111111122222222222223333333333333');
+  
 
     try {
       await FlutterEmailSender.send(email);
