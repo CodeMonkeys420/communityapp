@@ -1,10 +1,8 @@
-import 'package:communityapp/shared/bottom_navy_bar.dart';
+
 import 'package:communityapp/screens/wrapper.dart';
 import 'package:communityapp/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:communityapp/shared/nav.dart';
-
 import 'models/user.dart';
 
 void main() => runApp(MyApp());
