@@ -229,20 +229,6 @@ const PrimaryColorTwo = const Color(0xFFd9b46f);
 
 Future<void> _Alert(BuildContext context) {
 
-
-
- const platform = const MethodChannel('sendSms');
-  Future<Null> sendSms()async {
-    
-    try {
-      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."});
-      print("SendSMS");
-      print(result);
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-  }
-
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -295,3 +281,16 @@ UserID = id;
 }
 
 }
+
+
+ const platform = const MethodChannel('sendSms');
+  Future<Null> sendSms()async {
+    
+    try {
+      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."});
+      print("SendSMS");
+      print(result);
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+  }
