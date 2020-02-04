@@ -149,8 +149,6 @@ class _BrewListState extends State<BrewList> {
       },
     );
   }
-
-
 }
 
 
@@ -302,7 +300,7 @@ NameList.add(f.data["Name"]);
     text: 'The following booking was cancelled for a :',
   );
 final _recipientController = TextEditingController(
-    text: 'kylechrispotgieter@gmail.com',
+    text: '',
   );
 
   final _subjectController = TextEditingController(text: 'canceled booking');
@@ -328,7 +326,7 @@ final _recipientController = TextEditingController(
       platformResponse = error.toString();
     }
 
-    //if (!mounted) return;
+
 
    
   }
