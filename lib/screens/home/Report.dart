@@ -125,11 +125,11 @@ final _recipientController = TextEditingController(
                             style:
 
                             TextStyle(
-                                color: Colors.deepPurple
+                                color: Colors.black
                             ),
                             underline: Container(
                               height: 2,
-                              color: Colors.deepPurpleAccent,
+                              color: Colors.black,
                             ),
                             onChanged: (String newValue) {
                               setState(() {
@@ -159,8 +159,8 @@ final _recipientController = TextEditingController(
                           child:
                           new RaisedButton.icon(
 
-                            textColor: Colors.white,
-                            color: Colors.amber,
+                            textColor: Colors.black,
+                            color: Colors.white70,
                             onPressed:() {
                       
                               getImage();
@@ -180,8 +180,8 @@ final _recipientController = TextEditingController(
                           child:
                           new RaisedButton.icon(
 
-                            textColor: Colors.white,
-                            color: Colors.amber,
+                            textColor: Colors.black,
+                            color: Colors.white70,
                             onPressed:() {
                                
                                 

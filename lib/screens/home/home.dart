@@ -2,6 +2,7 @@
 import 'package:communityapp/screens/bookings/page.dart';
 import 'package:communityapp/screens/home/Report.dart';
 import 'package:communityapp/services/auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,7 +14,7 @@ import 'package:communityapp/screens/bookings/Gridview.dart';
 
 var UserID ;
 final AuthService _auth = AuthService();
-const PrimaryColor = const Color(0xFF151026);
+const PrimaryColor = const Color(0xD9B46F);
 bool FlagLoc = false;
 final databaseReference = Firestore.instance;
 
@@ -102,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(217,180,111, 1),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -109,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage>  {
  FlatButton.icon(
                 padding: const EdgeInsets.only(right: 60.0),
                  label: Text(''),
-                icon: Icon(Icons.exit_to_app),
+                icon: Icon(Icons.power_settings_new),
                 //  label: Text('Log Out'),
                 // icon: Icon(Icons.person),
 
@@ -137,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage>  {
 
       IconButton(
       icon: Icon(Icons.error_outline),
+      color: Colors.black,
       padding: const EdgeInsets.only(left: 50.0,right: 20.0),
       onPressed: () {
         _Alert(context);
@@ -223,9 +226,9 @@ Map<int, Color> color =
   900:Color.fromRGBO(217,180,111, 1),
 };
 //waar die color func assign word
-MaterialColor colorCustom = MaterialColor(0xFFd9b46f, color);
+MaterialColor colorCustom = MaterialColor(0xD9B46F, color);
 //color insert word
-const PrimaryColorTwo = const Color(0xFFd9b46f);
+const PrimaryColorTwo = const Color(0xD9B46F);
 
 Future<void> _Alert(BuildContext context) {
 

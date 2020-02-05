@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
     ),
           child: Scaffold(
         backgroundColor: Colors.transparent,
-      appBar: AppBar(backgroundColor: Colors.blue[400],
+      appBar: AppBar(backgroundColor: Color.fromRGBO(217,180,111, 1),
       elevation: 1.0,
       title: Text('Sign Up to Community Portal'),
       actions: <Widget>[

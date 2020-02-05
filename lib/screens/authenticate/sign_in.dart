@@ -1,6 +1,7 @@
 import 'package:communityapp/services/auth.dart';
 import 'package:communityapp/shared/constance.dart';
 import 'package:communityapp/shared/loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -34,7 +35,7 @@ class _SignInState extends State<SignIn> {
     ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(backgroundColor: Colors.blue[400],
+        appBar: AppBar(backgroundColor: Color.fromRGBO(217,180,111, 1),
         elevation: 1.0,
         title: Text('Sign in to Community Portal'),
         actions: <Widget>[

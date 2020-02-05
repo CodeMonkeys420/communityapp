@@ -115,8 +115,8 @@ crossAxisSpacing: 2,
             child:
             new RaisedButton.icon(
 
-            textColor: Colors.white,
-            color: Colors.amber,
+            textColor: Colors.black,
+            color: Colors.white70,
             onPressed:(){ booking = index;
 
             if(booking==0){
@@ -486,6 +486,7 @@ class bookingPageState extends State<bookingPage> {
 
       appBar: AppBar(
         title: Text("Bookings"),
+        backgroundColor: Color.fromRGBO(217,180,111, 1),
 
 
       ),
@@ -533,8 +534,8 @@ class bookingPageState extends State<bookingPage> {
                         child:
                         new RaisedButton.icon(
 
-                          textColor: Colors.white,
-                          color: Colors.amber,
+                          textColor: Colors.black,
+                          color: Colors.white70,
                           onPressed:(){
                          
 
@@ -658,6 +659,7 @@ class bookSpotState extends State<bookSpot> {
          key: _scaffoldKey,
             appBar: AppBar(
               title: Text("Book"),
+              backgroundColor: Color.fromRGBO(217,180,111, 1),
 
 
             ),
@@ -842,8 +844,8 @@ class bookSpotState extends State<bookSpot> {
                               child:
                               new RaisedButton.icon(
 
-                                textColor: Colors.white,
-                                color: Colors.amber,
+                                textColor: Colors.black,
+                                color: Colors.white70,
                                 onPressed:()async{
 
 

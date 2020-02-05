@@ -198,6 +198,7 @@ final Posts article;
    return new  Scaffold(
 appBar: AppBar(
 title: Text('Article'),
+  backgroundColor: Color.fromRGBO(217,180,111, 1),
 
 ),
 body: GridView.count(
