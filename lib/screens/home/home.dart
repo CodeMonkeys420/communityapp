@@ -242,21 +242,14 @@ Future<void> _Alert(BuildContext context) {
                Navigator.of(context).pop();
                if ( lat!= null)
                  {
-                 //  print(lat +' '+Lng);
+                   print(lat +' '+Lng);
                   databaseReference.collection('Panic').document()
                   .setData({ 'Date': Timestamp.now(),'Location':
                   lat.toString()+' '+Lng.toString(),
                   'UserID':UserID});
                  _bodyController.text= _bodyController.text+ 'Location:'+
-                  lat.toString()+' '+Lng.toString();
-                 // print("panic!!!@!@!@!");
-
-                  
-                  
-                  
+                  lat.toString()+' '+Lng.toString();                  
                   send();
-
-
                    //sendSms();
                  }
 
@@ -297,7 +290,7 @@ UserID = id;
 final _subjectController = TextEditingController(text: 'Panic');
 
   var _recipientController = TextEditingController(
-    text: 'kylechrispotgieter@gmail.com',
+    text: 'security@valdevie.co.za',
   );
 
   var _bodyController = TextEditingController(
