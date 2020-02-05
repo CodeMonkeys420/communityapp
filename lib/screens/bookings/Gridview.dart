@@ -354,14 +354,6 @@ Text LabelIndex(var indexNum, var nameIndex){
           return   Text('SwingFit Training Academy');
 
       }
-
-
-
-
-
-
-
-
     }
 
 

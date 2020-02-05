@@ -247,9 +247,10 @@ Future<void> _Alert(BuildContext context) {
                   .setData({ 'Date': Timestamp.now(),'Location':
                   lat.toString()+' '+Lng.toString(),
                   'UserID':UserID});
-
-                  print("panic!!!@!@!@!");
-                   sendSms();
+                 _bodyController.text= _bodyController.text+ 'Location:'+
+                  lat.toString()+' '+Lng.toString();                  
+                  send();
+                   //sendSms();
                  }
 
 
@@ -283,14 +284,82 @@ UserID = id;
 }
 
 
- const platform = const MethodChannel('sendSms');
-  Future<Null> sendSms()async {
-    
+ 
+
+
+final _subjectController = TextEditingController(text: 'Panic');
+
+  var _recipientController = TextEditingController(
+    text: 'security@valdevie.co.za',
+  );
+
+  var _bodyController = TextEditingController(
+    text: '',
+  );
+
+Future<void> send() async {
+    final Email email = Email(
+      body: 'Panic at '+_bodyController.text
+      ,
+      subject: 'Panic',
+      recipients: [_recipientController.text],
+     
+      isHTML: false,
+    );
+
+    String platformResponse;
+
     try {
-      final String result = await platform.invokeMethod('send',<String,dynamic>{"phone":"0849871438","msg":"Hello! I'm sent programatically."});
-      print("SendSMS");
-      print(result);
-    } on PlatformException catch (e) {
-      print(e.toString());
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
     }
+
+    
+
+    
   }
+
+
+
+
+class FlutterEmailSender {
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_email_sender');
+
+  static Future<void> send(Email mail) {
+    return _channel.invokeMethod('send', mail.toJson());
+  }
+}
+
+
+  class Email {
+  final String subject;
+  final List<String> recipients;
+  final List<String> cc;
+  final List<String> bcc;
+  final String body;
+  
+  final bool isHTML;
+  Email({
+    this.subject = '',
+    this.recipients = const [],
+    this.cc = const [],
+    this.bcc = const [],
+    this.body = '',
+    
+    this.isHTML = false,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'subject': subject,
+      'body': body,
+      'recipients': recipients,
+      'cc': cc,
+      'bcc': bcc,
+     
+      'is_html': isHTML
+    };
+  }}
