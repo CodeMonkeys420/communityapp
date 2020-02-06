@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-
+import 'page.dart';
 import 'package:spinner_input/spinner_input.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart' show DateFormat;
@@ -115,8 +115,8 @@ crossAxisSpacing: 2,
             child:
             new RaisedButton.icon(
 
-            textColor: Colors.white,
-            color: Colors.amber,
+            textColor: Colors.black,
+            color: Colors.white70,
             onPressed:(){ booking = index;
 
             if(booking==0){
@@ -486,6 +486,7 @@ class bookingPageState extends State<bookingPage> {
 
       appBar: AppBar(
         title: Text("Bookings"),
+        backgroundColor: Color.fromRGBO(217,180,111, 1),
 
 
       ),
@@ -533,8 +534,8 @@ class bookingPageState extends State<bookingPage> {
                         child:
                         new RaisedButton.icon(
 
-                          textColor: Colors.white,
-                          color: Colors.amber,
+                          textColor: Colors.black,
+                          color: Colors.white70,
                           onPressed:(){
                          
 
@@ -658,6 +659,7 @@ class bookSpotState extends State<bookSpot> {
          key: _scaffoldKey,
             appBar: AppBar(
               title: Text("Book"),
+              backgroundColor: Color.fromRGBO(217,180,111, 1),
 
 
             ),
@@ -842,8 +844,8 @@ class bookSpotState extends State<bookSpot> {
                               child:
                               new RaisedButton.icon(
 
-                                textColor: Colors.white,
-                                color: Colors.amber,
+                                textColor: Colors.black,
+                                color: Colors.white70,
                                 onPressed:()async{
 
 
@@ -945,11 +947,7 @@ class bookSpotState extends State<bookSpot> {
 
                                                   //  final String groupID = documentReference.documentID;
 
-                                                     
-
-                                        
-
-
+                                                  
 
                                         }
 
@@ -975,7 +973,7 @@ class bookSpotState extends State<bookSpot> {
 
 }
 var _recipientController = TextEditingController(
-    text: 'kylechrispotgieter@gmail.com',
+    text: '',
   );
 
   var _bodyController = TextEditingController(
@@ -987,25 +985,26 @@ void PlaceName (var indexNum, var nameIndex) {
 
 
       if (nameIndex == 0) {
-        FacilityID= 'Yz4sb6xBx2hvdpN7HmZX';
-          FacilityReference = 'Yz4sb6xBx2hvdpN7HmZX';
+       var  i = dbFacList.indexOf('POLO CLUB RESTAURANT');
+      FacilityReference = 'Yz4sb6xBx2hvdpN7HmZX';
       Place = 'POLO CLUB RESTAURANT';
-      _recipientController.text= 'restaurant@valdevie.co.za';
+      _recipientController.text= EmailList[i].toString();
+      print(_recipientController.text);
       _bodyController.text= _bodyController.text+'  POLO CLUB RESTAURANT';
      
       }
       else if (nameIndex == 1) {
-        FacilityID= '5mNcafO5KtopVZaEKCIq';
+         var  i = dbFacList.indexOf('THE VALLEY RESTAURANT');
         Place = 'THE VALLEY RESTAURANT';
         FacilityReference = '5mNcafO5KtopVZaEKCIq';
-        _recipientController.text= 'restaurant@valdevie.co.za';
+        _recipientController.text= EmailList[i].toString();
         _bodyController.text= _bodyController.text+'  THE VALLEY RESTAURANT';
       }
       else if (nameIndex == 2) {
-         FacilityID= 'S0zfNxaQSqoKAzRhwIuZ';
+        var  i = dbFacList.indexOf('Fleet Coffee roastery');
         FacilityReference = 'S0zfNxaQSqoKAzRhwIuZ';
         Place = 'Fleet Coffee roastery ';
-         _recipientController.text= ' reservations@reubenscafe.co.za ';
+          _recipientController.text= EmailList[i].toString();
       }
 
   }
@@ -1013,10 +1012,10 @@ void PlaceName (var indexNum, var nameIndex) {
 
 
     if (nameIndex == 0) {
-      FacilityID= 'lbAMWRvPesPkVypJfOkb';
+      var  i = dbFacList.indexOf('L’HUGUENOT VENUE & VINOTEQUE');
       FacilityReference='lbAMWRvPesPkVypJfOkb';
       Place = 'L’HUGUENOT VENUE & VINOTEQUE';
-      _recipientController.text= 'marketing@lhuguenot.com';
+      _recipientController.text= EmailList[i].toString();
     }
 
 
@@ -1027,16 +1026,16 @@ void PlaceName (var indexNum, var nameIndex) {
 
 
     if (nameIndex == 0) {
-      FacilityID= 'isBzGSOgF7qS3PxCyAUv';
+      var  i = dbFacList.indexOf('PEARL VALLEY JACK NICKLAUS SIGNATURE GOLF COURSE');
       Place =   'PEARL VALLEY JACK NICKLAUS SIGNATURE GOLF COURSE';
       FacilityReference = 'isBzGSOgF7qS3PxCyAUv';
-      _recipientController.text= 'golf@pearlvalley.co.za';
+      _recipientController.text= EmailList[i].toString();
     }
     else{
-      FacilityID= 'BdgxN0CITYMYJJqOQ06f';
+      var  i = dbFacList.indexOf('SwingFit Training Academy');
       FacilityReference = 'BdgxN0CITYMYJJqOQ06f';
       Place = 'SwingFit Training Academy';
-      _recipientController.text= 'james.wade@valdevie.co.za';
+      _recipientController.text= EmailList[i].toString();
     }
 
 
@@ -1050,10 +1049,10 @@ void PlaceName (var indexNum, var nameIndex) {
 
 
     if (nameIndex == 0) {
-      FacilityID= '5rbhWfXzl5Loq6oCrreU';
+      var  i = dbFacList.indexOf('CAMELOT SPA VAL DE VIE');
        FacilityReference = '5rbhWfXzl5Loq6oCrreU';
       Place = 'CAMELOT SPA VAL DE VIE';
-      _recipientController.text= 'info@camelotspa.co.za';
+      _recipientController.text= EmailList[i].toString();
     }
 
 
@@ -1064,10 +1063,10 @@ void PlaceName (var indexNum, var nameIndex) {
 
 
     if (nameIndex == 0) {
-      FacilityID= 'CHYKh3mWb3xVm2m2EHwN';
+      var  i = dbFacList.indexOf('PEARL VALLEY HOTEL BY MANTIS');
       Place = 'PEARL VALLEY HOTEL BY MANTIS';
        FacilityReference = 'CHYKh3mWb3xVm2m2EHwN';
-       _recipientController.text= 'pearlvalleyhotel@mantiscollection.com';
+       _recipientController.text= EmailList[i].toString();
       
     }
 
@@ -1081,49 +1080,49 @@ void PlaceName (var indexNum, var nameIndex) {
     if(nameIndex==0)
 
     {
-      FacilityID= 'DlaQvFB5NShSbh0lCoaA';
+      var  i = dbFacList.indexOf('Polo Academy Lessons');
       FacilityReference = 'DlaQvFB5NShSbh0lCoaA';
       Place = 'Polo Academy Lessons';
-          _recipientController.text= 'cape.petotel@mweb.co.za';
+      _recipientController.text= EmailList[i].toString();
     }
     else if (nameIndex==1)
     {
-      FacilityID= 'uCqK1eTNgERkvagM8n7L';
+      var  i = dbFacList.indexOf('Tennis');
       Place =    'Tennis';
       FacilityReference = 'uCqK1eTNgERkvagM8n7L';
-      _recipientController.text= 'events@pearlvalley.co.za';
+       _recipientController.text= EmailList[i].toString();
       _bodyController.text= _bodyController.text+'  Tennis';
     }
     else if (nameIndex==2)
     {
-      FacilityID= 'tjkK8Nj780J726Z3gARA';
+      var  i = dbFacList.indexOf('Equestrian competitive coaching');
       FacilityReference = 'tjkK8Nj780J726Z3gARA';
       Place = 'Equestrian competitive coaching';
-       _recipientController.text= 'instructor1@valdevie.co.za';
+        _recipientController.text= EmailList[i].toString();
        _bodyController.text= _bodyController.text+'  Equestrian competitive coaching';
     }
     else if (nameIndex==3)
     {
-      FacilityID= 'pVNuIBj0uM300FJPszet';
+      var  i = dbFacList.indexOf('Equestrian riding school');
       FacilityReference = 'pVNuIBj0uM300FJPszet';
       Place = 'Equestrian riding school';
- _recipientController.text= 'instructor1@valdevie.co.za';
+ _recipientController.text= EmailList[i].toString();
  _bodyController.text= _bodyController.text+'  Equestrian riding school';
     }
     else if (nameIndex==4)
     {
-      FacilityID= 'hCKDdzKRknzhVfT3yA9h';
+      var  i = dbFacList.indexOf('Pearl valley Boma');
       FacilityReference = 'hCKDdzKRknzhVfT3yA9h';
       Place = 'Pearl valley Boma';
-       _recipientController.text= 'events@pearlvalley.co.za';
+       _recipientController.text= EmailList[i].toString();
         _bodyController.text= _bodyController.text+'  Pearl valley Boma';
     }
     else if (nameIndex==5)
     {
-      FacilityID= '6pjxPBq1RQ61FmpXpH1p';
+      var  i = dbFacList.indexOf('Pearl valley Boma');
       FacilityReference = '6pjxPBq1RQ61FmpXpH1p';
       Place = 'Ryk Neethling swim school';
-      _recipientController.text= 'valdevie@learntoswim.co.za';
+      _recipientController.text= EmailList[i].toString();
 
     }
    
